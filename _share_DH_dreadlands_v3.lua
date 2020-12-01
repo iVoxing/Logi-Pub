@@ -167,10 +167,13 @@ end
 
 -- 添加其他模塊：
 
----------------
+-- 添加結束
+
 function OnEvent(event, arg, family)
     --OutputLogMessage("\n"..event.." "..arg)
     -- 調用其他模塊
+
+    -- 調用結束
     
     -- 以下請勿修改
     if event == "MOUSE_BUTTON_PRESSED" and arg == keys.swi and family == "mouse" then
