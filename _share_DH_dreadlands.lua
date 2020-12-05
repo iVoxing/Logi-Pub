@@ -37,7 +37,7 @@ local gain_mom  = false
 local g_m_auto  = true      -- 啟動時自動疊動能（一次）開關，改成 false 可關閉
 local rmb_down  = false
 local stand_on  = false
-local rf_pause  = nil
+local rf_pause  = false
 
 local skill = {
     -- 注意：以下技能，如果不需要自動刷新，可以把 auto = true 改為 auto = false
@@ -138,7 +138,7 @@ function hunger_n_strafe(mdf)
             PressAndReleaseKey("escape")
             Sleep(10)
             PressAndReleaseKey("escape")
-            rf_pause = nil
+            rf_pause = false
         end
     end
 
