@@ -127,7 +127,9 @@ function hunger_n_strafe(mdf)
     end
     function g_pause()
         if not rf_pause then
-            PressAndReleaseKey("escape")
+            PressAndReleaseKey(keys.clear)
+			Sleep(20)
+           PressAndReleaseKey("escape")
             Sleep(100)
             PressAndReleaseKey("enter")
             rf_pause = true
