@@ -29,8 +29,6 @@ local keys = {
     indicator = "capslock", -- 可修改為其他鎖定鍵，比如 numlock、M 鍵，建議保留本設置
 }
 local swi_is_on = false        
-local pet, fan  = 1, 2
-local sk_1      = fan       -- pet: 寵物, fan: 刀扇，修改成自己的配置
 local sk_4_rpt  = 5000      -- 煙幕: 50, 暗影: 5000，修改成自己的配置
 local t0        = -20000
 local gain_mom  = false
