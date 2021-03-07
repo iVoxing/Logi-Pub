@@ -36,6 +36,7 @@ local g_m_auto  = true      -- 啟動時自動疊動能（一次）開關，改�
 local rmb_down  = false
 local stand_on  = false
 local rf_pause  = false
+local lmb_dl    = 17
 
 local skill = {
     -- 注意：以下技能，如果不需要自動刷新，可以把 auto = true 改為 auto = false
@@ -43,6 +44,7 @@ local skill = {
     sk2 = {timer = t0, key = keys.skill_2, auto = true, rp_time = 50,},       -- 復仇     
     sk3 = {timer = t0, key = keys.skill_3, auto = true, rp_time = 50,},       -- 蓄勢待發 
     sk4 = {timer = t0, key = keys.skill_4, auto = true, rp_time = sk_4_rpt,}, -- 暗影/煙幕
+    lmb = {timer = t0, key = 1, auto = true, rp_time = lmb_dl,},
 }
 
 function mdf_check()
@@ -55,19 +57,12 @@ function mdf_check()
 end
 
 function refresh(sk)
-    local stand_dly = 5
     if (GetRunningTime() - sk.timer >= sk.rp_time) and sk.auto then
         if type(sk.key) == "string" then
             PressAndReleaseKey(sk.key)
         else
             if sk.key == 1 then
-                PressKey(keys.stand)
-                Sleep(stand_dly)
                 PressAndReleaseMouseButton(1)
-                Sleep(stand_dly)
-                ReleaseKey(keys.stand)
-            else
-                PressAndReleaseMouseButton(sk.key)
             end
         end
         sk.timer = GetRunningTime()
@@ -89,7 +84,6 @@ function gain_momentum()
 end
 
 function hunger_n_strafe(mdf)
-    local mb1_dl = 18            -- 16, 17, 18, 484, 485, 18 may be the best
     function set_stand_off()
         if stand_on then
             ReleaseKey(keys.stand)
@@ -120,8 +114,7 @@ function hunger_n_strafe(mdf)
         refresh(skill.sk2)
         refresh(skill.sk3)
         refresh(skill.sk4)
-        PressAndReleaseMouseButton(1)
-        Sleep(mb1_dl)
+        refresh(skill.lmb)
     end
     function g_pause()
         if not rf_pause then
@@ -150,15 +143,18 @@ function hunger_n_strafe(mdf)
         end,
         [1] = function()
             set_stand_on()
+            lmb_dl = 3600
             play_HnS()
         end,
         [2] = g_pause,
         [4] = function()
             set_stand_off()
+            lmb_dl = 17
             play_HnS()
         end,
         [8] = function() 
             set_stand_off()
+            lmb_dl = 17
             play_HnS()
         end,
     }
