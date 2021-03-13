@@ -36,7 +36,7 @@ local g_m_auto  = true      -- 啟動時自動疊動能（一次）開關，改�
 local rmb_down  = false
 local stand_on  = false
 local rf_pause  = false
-local lmb_dl    = 17
+local lmb_dl    = 18
 
 local skill = {
     -- 注意：以下技能，如果不需要自動刷新，可以把 auto = true 改為 auto = false
