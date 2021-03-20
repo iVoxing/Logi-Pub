@@ -251,6 +251,8 @@ function grid_loop(start_x, start_y, end_x, end_y, func_pre, func_grid, func_pos
 	function loop_check()
 		if mdf_check() == gsz or loop_on then
 			return true
+		else
+			return false
 		end
 	end
 
