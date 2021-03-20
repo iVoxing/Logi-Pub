@@ -12,7 +12,7 @@ _keys = {
 -- delay_test = false -- test virtual delay offset, true for test, false for don't test
 
 -- my_load defined in profile script
-my_load("_g_vars")
+my_load("_sample_g_vars")
 
 local x, y = 1, 2
 
@@ -363,7 +363,7 @@ end
 
 function paragon_allot()
 	screen_test()
-	my_load("_g_vars")
+	my_load("_sample_g_vars")
 	local this_screen	= _this_screen
 	local keys 			= _keys
 	
@@ -449,7 +449,7 @@ function paragon_allot()
 
 	function low_allot()
 		mdf_wait()
-		my_load("_g_low_pa")
+		my_load("_sample_g_low_pa")
 		local flow = _low_pa_flow
 		for tid = 1, 4 do
 			goto_tab(tid)
