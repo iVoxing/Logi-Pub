@@ -73,26 +73,25 @@ function time_check(t)
 end
 
 function loop_start()
-	if not act_is_on then
-		act_is_on = true
-	end
+	act_is_on = true
+	set_rmb_down()
 end
 
 function jump_to_target()
 	if act_is_on then
-		PressAndReleaseKey(keys.skill_3)	-- jump
+		PressAndReleaseKey("d")
 	end
 end
 
 function image_n_channel()
-	if act_is_on then
-		PressAndReleaseKey(keys.skill_4)	-- image
-		if active_s2 then
-			PressAndReleaseKey(keys.skill_2)	-- frost nova
-		end
-		-- always channelling, no action here
+	PressAndReleaseKey("v")	-- image
+	if active_s2 then
+		PressAndReleaseKey("s")	-- frost nova
 	end
+	-- always channelling, no action here
 end
+
+EnablePrimaryMouseButtonEvents(true)
 
 function OnEvent(event, arg, family)
 	--OutputLogMessage("\n"..event.." "..arg)
@@ -101,12 +100,12 @@ function OnEvent(event, arg, family)
 		swi_is_on = not swi_is_on
 		AbortMacro()
 		if swi_is_on then
-			EnablePrimaryMouseButtonEvents(true)
+			--EnablePrimaryMouseButtonEvents(true)
 			PlayMacro(swi_macro)
-			set_rmb_down()
+			--set_rmb_down()
 		else
-			EnablePrimaryMouseButtonEvents(false)
-			set_rmb_up()
+			--EnablePrimaryMouseButtonEvents(false)
+			--set_rmb_up()
 		end
 	end
 
@@ -142,8 +141,9 @@ function OnEvent(event, arg, family)
 
 	while true do
 		if IsModifierPressed("lshift") and swi_is_on then
+			set_rmb_down()
 			if act_flow then
-				for i, act in ipairs(act_flow) do
+				for i, act in pairs(act_flow) do
 					if time_check(act.timing) then
 						act.func()
 					end
@@ -154,6 +154,7 @@ function OnEvent(event, arg, family)
 			end
 		else
 			act_is_on = false
+			set_rmb_up()
 			break
 		end
 	end
