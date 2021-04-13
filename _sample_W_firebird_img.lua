@@ -8,7 +8,7 @@
 --		left	Spectral Blade
 --		right	Disintegrate
 -- Macro on G Mouse:
---		key "1", 100ms loop, Banding on G5
+--		"1", 100ms loop, Banding on G5
 -- Play:
 --		Press G5 to lock blasting and channelling
 --		at cold 0 or elec 0, Press G4 to set loop time, +ALT to set loop mode to 16s
@@ -34,6 +34,7 @@ local swi_is_on = false
 local act_is_on	= false
 local active_s2	= true
 local act_flow	= nil
+local t0		= nil
 local t0_offset	= 0			-- for adjust, such as -5
 local t_range	= 10
 local swi_macro = "1_100ms"	-- blast, simple loop macro
@@ -55,12 +56,12 @@ function set_rmb_up()
 end
 
 function set_act_flow_time()
-	local t0 = GetRunningTime() + t0_offset	-- at cold 0, or elec 0
+	t0 = GetRunningTime() + t0_offset	-- at cold 0, or elec 0
 	act_flow = {
 		t_00 = {timing = t0,		func = loop_start,},
-		t_05 = {timing = t0 + 500,	func = jump_to_target,},	-- jump to target
-		t_20 = {timing = t0 + 2000,	func = image_n_channel,},	-- call image, channel
-		t_35 = {timing = t0 + 3500,	func = jump_to_target,},	-- jump to target or oculus circle
+		t_05 = {timing = t0 + 1000,	func = jump_to_target,},	-- jump to target
+		t_20 = {timing = t0 + 2200,	func = image_n_channel,},	-- call image, channel
+		t_35 = {timing = t0 + 3200,	func = jump_to_target,},	-- jump to target or oculus circle
 	}
 end
 
@@ -100,12 +101,7 @@ function OnEvent(event, arg, family)
 		swi_is_on = not swi_is_on
 		AbortMacro()
 		if swi_is_on then
-			--EnablePrimaryMouseButtonEvents(true)
 			PlayMacro(swi_macro)
-			--set_rmb_down()
-		else
-			--EnablePrimaryMouseButtonEvents(false)
-			--set_rmb_up()
 		end
 	end
 
